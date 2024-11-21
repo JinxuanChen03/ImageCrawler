@@ -48,4 +48,5 @@ python image_downloader.py -f ./superstars/test.xlsx -c 姓名 -n 10 -o ./images
 下载的照片以人名作为文件夹名称，分别储存在`./images/<人名>/`。
 
 如需更改储存路径只需在命令中指定参数。
+注意：关闭代理后再使用人像抓取器。
 
