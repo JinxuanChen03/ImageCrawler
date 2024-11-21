@@ -40,5 +40,6 @@ python image_downloader.py -f ./superstars/test.xlsx -c 姓名 -n 10 -o ./images
 -c <保存人名的列名> 选填，默认为`姓名`
 
 -n <下载的图片数> 选填，默认为`10`，单人最大下载图片数为`10000`张。
+
 -o <输出文件路径> 选填，默认为`./images`。
 
