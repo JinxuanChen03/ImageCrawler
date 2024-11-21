@@ -11,7 +11,7 @@ import os
 
 def main(argv):
     parser = argparse.ArgumentParser(description="Image Downloader")
-    parser.add_argument("--excel_file", "-f", type=str,
+    parser.add_argument("--excel_file", "-f", type=str, default="./superstars/test.xlsx",
                         help='Excel文件路径')
     parser.add_argument("--column_name", "-c", type=str, default="姓名",
                         help='指定列名')
