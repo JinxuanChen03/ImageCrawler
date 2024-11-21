@@ -7,7 +7,7 @@ def main(argv):
     parser = argparse.ArgumentParser(description="Generate Excel File")
     parser.add_argument("--output", "-o", type=str, default="./superstars",
                         help="Output directory to save downloaded images.")
-    parser.add_argument("--filename", "-f", type=str, default="output.xlsx",
+    parser.add_argument("--filename", "-f", type=str, default="test.xlsx",
                         help="Name of the Excel file.")
     args = parser.parse_args(args=argv)
 
@@ -17,7 +17,6 @@ def main(argv):
 
     # 设置首行的标题
     ws.cell(row=1, column=1, value="姓名")
-    ws.cell(row=1, column=2, value="照片数")
 
     # 男明星
     # names = [
@@ -48,7 +47,7 @@ def main(argv):
     #     "张嘉倪", "张天爱", "张小斐", "张歆艺", "张馨予", "张雪迎", "张雨绮", "张子枫", "左小青"
     # ]
     names = [
-        "陈赫", "陈坤", "邓超"
+        "佟丽娅", "谢娜", "杨幂"
     ]
 
     # 将人名写入Excel表格
@@ -64,7 +63,7 @@ def main(argv):
     # 保存Excel文件
     wb.save(file_path)
 
-    print(f"Excel文件已保存到指定目录下: {file_path}")
+    print(f"Excel file has been saved in: {file_path}")
 
 
 if __name__ == '__main__':

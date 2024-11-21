@@ -14,16 +14,9 @@ python gen_excel.py -o ./superstars -f test.xlsx
 
 -o <文件保存路径> 选填，不填默认保存到`./superstars`
 
--f <文件名称> 必填。
+-f <文件名称> 选填，不填默认为`test.xlsx`
 
 如需更改人名请更改`gen_excel.py`文件中的`name`列表。
-
-
-
-表格格式默认为
-
-| 姓名 | 图片数 |
-| ---- | ------ |
 
 #### 获取人像图片
 
@@ -43,3 +36,11 @@ python image_downloader.py -f ./superstars/test.xlsx -c 姓名 -n 10 -o ./images
 
 -o <输出文件路径> 选填，默认为`./images`。
 
+#### 输出结果
+
+人名表格储存在指定路径下，格式默认为：
+
+| 姓名 | 下载图片数 |
+| ---- | ---------- |
+
+下载的照片以人名作为文件夹名称，分别储存在指定路径下。

@@ -29,20 +29,33 @@ def main(argv):
     # 读取 Excel 文件
     df = pd.read_excel(args.excel_file)
 
+    # 添加一个新的列来存储下载的图片数
+    df["下载图片数"] = 0
+
     # 遍历关键词列
-    for keyword in df[args.column_name]:
+    for index, row in df.iterrows():
+        keyword = row[args.column_name]
+
         crawled_urls = crawler.crawl_image_urls(keyword, max_number=args.max_number,
                                                 proxy_type=None, proxy=None)
 
         file_addr = os.path.join(args.output, utils.gen_valid_dir_name_for_keywords(keyword))
         os.makedirs(file_addr, exist_ok=True)
 
-        downloader.download_images(image_urls=crawled_urls, dst_dir=file_addr,
-                                   concurrency=50, timeout=10,
-                                   proxy_type=None, proxy=None,
-                                   file_prefix="Bing")
+        downloaded_count = downloader.download_images(image_urls=crawled_urls, dst_dir=file_addr,
+                                                      concurrency=50, timeout=10,
+                                                      proxy_type=None, proxy=None,
+                                                      file_prefix="Bing")
+
+        # 更新下载的图片数到 DataFrame
+        df.at[index, "下载图片数"] = downloaded_count
 
         print(f"Finished processing keyword: {keyword}")
+        print(f"Successfully downloaded {downloaded_count} images.")
+
+    # 将更新后的 DataFrame 写回到 Excel 文件
+    df.to_excel(args.excel_file, index=False)
+    print(f"Excel file updated: {args.excel_file}")
 
     print("All done.")
 

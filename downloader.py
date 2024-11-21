@@ -42,6 +42,7 @@ def download_image(image_url, dst_dir, file_name, timeout=20, proxy_type=None, p
                 new_file_path = os.path.join(dst_dir, new_file_name)
                 shutil.move(file_path, new_file_path)
                 print("## OK:  {}  {}".format(new_file_name, image_url))
+                return True
             else:
                 os.remove(file_path)
                 print("## Err: TYPE({})  {}".format(file_type, image_url))
@@ -53,6 +54,7 @@ def download_image(image_url, dst_dir, file_name, timeout=20, proxy_type=None, p
                 response.close()
             print("## Fail:  {}  {}".format(image_url, e.args))
             break
+    return False
 
 
 def download_images(image_urls, dst_dir, file_prefix="img", concurrency=50, timeout=20, proxy_type=None, proxy=None):
@@ -73,6 +75,7 @@ def download_images(image_urls, dst_dir, file_prefix="img", concurrency=50, time
     with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as executor:
         future_list = list()
         count = 0
+        success_count = 0
         if not os.path.exists(dst_dir):
             os.makedirs(dst_dir)
         for image_url in image_urls:
@@ -80,4 +83,11 @@ def download_images(image_urls, dst_dir, file_prefix="img", concurrency=50, time
             future_list.append(executor.submit(
                 download_image, image_url, dst_dir, file_name, timeout, proxy_type, proxy))
             count += 1
+
+        for future in concurrent.futures.as_completed(future_list):
+            if future.result():  # 如果下载成功，增加计数器
+                success_count += 1
+
         concurrent.futures.wait(future_list, timeout=180)
+
+        return success_count
