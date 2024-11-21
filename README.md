@@ -6,7 +6,7 @@
 
 运行以下命令获取人名表格。
 
-```console
+```
 python gen_excel.py -o ./superstars -f test.xlsx
 ```
 
