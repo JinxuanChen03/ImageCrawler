@@ -23,7 +23,7 @@ python gen_excel.py -o ./superstars -f test.xlsx
 运行以下命令抓取人像图片：
 
 ```
-python image_downloader.py -f ./superstars/test.xlsx -c 姓名 -n 10 -o ./images
+python image_downloader.py -f ./superstars/test.xlsx -c 姓名 -o ./images
 ```
 
 参数解释：
@@ -32,7 +32,9 @@ python image_downloader.py -f ./superstars/test.xlsx -c 姓名 -n 10 -o ./images
 
 -c <保存人名的列名> 选填，不填默认为`姓名`
 
--n <下载的图片数> 选填，不填默认为`10`，单人最大下载图片数为`10000`张。
+~~-n <下载的图片数> 选填，不填默认为`10`，单人最大下载图片数为`10000`张。~~
+
+~~-n 参数暂时禁用，需下载多张图时在代码中恢复相应注释才可下载多张图~~
 
 -o <输出文件路径> 选填，不填默认为`./images`。
 
@@ -45,9 +47,10 @@ python image_downloader.py -f ./superstars/test.xlsx -c 姓名 -n 10 -o ./images
 | 姓名 | 下载图片数 |
 | ---- | ---------- |
 
-下载的照片以人名作为文件夹名称，分别储存在`./images/<人名>/`。
+下载的照片以人名作为名称，分别储存为`./images/<人名>.jpg`。
 
 如需更改储存路径只需在命令中指定参数。
 
 **注意：关闭代理后再使用人像抓取器。**
 
+**注意：根据要求，每个人的照片按照<人名.jpg>命名，默认只下载一张图。由于指定了照片命名，下载多张图会造成文件覆盖，该版本关闭了下载多张图的参数入口。**
